@@ -3,321 +3,275 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>.mate — SaaS에서 우리 회사 시스템으로</title>
-<meta name="description" content="빌려 쓰던 SaaS를 AI가 일하는 자체 시스템으로. 구축부터 운영까지 하나의 구독, .ax">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<title>.mate — 사업이 커지면, SaaS가 좁아집니다</title>
+<meta name="description" content="범용 SaaS를 우리 사업 방식에 맞는 자체 시스템으로. 그 안에서 AI가 실제 업무를 맡습니다. .ax">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
 <style>
   :root{
-    --ink:#0A0A0A; --paper:#FFFFFF; --red:#D82E28;
-    --mute:#8A8A8A; --line:#E6E6E6; --ghost:#EFEFEF;
-    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+    --paper:#FFFFFF; --ink:#000000; --red:#D82E28;
+    --off:#C4C4C4; --soft:#6B6B6B;
+    --font:"Wanted Sans Variable","Wanted Sans",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{background:var(--paper);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
-       -webkit-font-smoothing:antialiased;letter-spacing:-0.02em;word-break:keep-all}
-  a{color:inherit;text-decoration:none}
+  body{background:var(--paper);color:var(--ink);font-family:var(--font);word-break:keep-all;
+       -webkit-font-smoothing:antialiased;font-feature-settings:"ss01"}
+  a{color:inherit}
+  ul,ol{list-style:none}
+  :focus-visible{outline:3px solid var(--red);outline-offset:3px}
 
-  .page{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:0 clamp(16px,4vw,56px)}
+  .page{min-height:100vh;display:flex;flex-direction:column;padding:0 clamp(16px,4vw,64px)}
 
-  /* header */
-  header{display:flex;align-items:center;justify-content:space-between;height:84px}
+  header{display:flex;align-items:center;justify-content:space-between;height:88px}
   .logo img{height:26px;display:block}
-  nav{display:flex;gap:clamp(16px,3vw,40px);align-items:center;font-weight:600;font-size:15px}
-  nav a{position:relative;padding:6px 0}
-  nav a::after{content:"";position:absolute;left:50%;bottom:-4px;width:5px;height:5px;border-radius:50%;
-       background:var(--red);transform:translateX(-50%) scale(0);transition:transform .2s}
-  nav a:hover::after{transform:translateX(-50%) scale(1)}
-  nav .cta{border:2px solid var(--ink);border-radius:999px;padding:7px 16px}
-  nav .cta::after{display:none}
-  nav .cta:hover{background:var(--ink);color:var(--paper)}
+  nav{display:flex;gap:clamp(18px,3vw,44px);font-size:16px;font-weight:600}
+  nav a{text-decoration:none}
+  nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+  nav a[aria-current]{text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:3px;text-underline-offset:6px}
 
-  /* hero */
-  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,64px);align-items:center;padding:24px 0}
-  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--mute);margin-bottom:28px;display:flex;gap:10px;align-items:center}
-  .eyebrow b{color:var(--ink);font-weight:600}
-  h1{font-size:clamp(34px,4.3vw,66px);line-height:1.08;font-weight:800;letter-spacing:-0.045em}
-  h1 .dot{color:var(--red)}
-  .lead{margin-top:28px;font-size:clamp(16px,1.35vw,19px);line-height:1.65;color:#3A3A3A;max-width:30em;font-weight:500}
-  .lead strong{color:var(--ink);font-weight:700}
-  .actions{margin-top:40px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);font-weight:700;
-       padding:16px 26px;border-radius:999px;font-size:16px;transition:background .2s}
+  main{flex:1;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(32px,5vw,96px);
+       align-items:center;padding:clamp(16px,3vh,40px) 0 clamp(32px,6vh,72px)}
+
+  h1{font-size:clamp(40px,4.7vw,80px);line-height:1.06;font-weight:800;letter-spacing:-0.05em}
+  .lead{margin-top:32px;font-size:clamp(17px,1.3vw,20px);line-height:1.65;font-weight:500;color:var(--soft);max-width:26em}
+  .lead b{color:var(--ink);font-weight:700}
+  .act{margin-top:44px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px}
+  .btn{display:inline-block;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:700;font-size:17px;
+       padding:20px 30px;border-radius:2px}
   .btn:hover{background:var(--red)}
-  .btn i{width:8px;height:8px;border-radius:50%;background:var(--red);transition:background .2s}
-  .btn:hover i{background:var(--paper)}
-  .link{font-weight:700;border-bottom:2px solid var(--ink);padding-bottom:2px}
-  .lines{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px}
-  .lines a{font-weight:700;font-size:14px;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;transition:border-color .2s}
-  .lines a:hover{border-color:var(--ink)}
-  .lines a span{color:var(--red)}
+  .txt{font-weight:600;text-underline-offset:6px;text-decoration-thickness:2px}
+  .lines{margin-top:56px;display:flex;flex-wrap:wrap;gap:6px 26px;font-size:15px;font-weight:700}
+  .lines a{text-decoration:none;color:var(--soft)}
+  .lines a:hover{color:var(--ink)}
+  .lines a[aria-current]{color:var(--ink)}
+  .lines i{font-style:normal;color:var(--red)}
 
-  /* stage */
-  .stage{position:relative;width:100%;aspect-ratio:600/520}
-  .stage svg{width:100%;height:100%;display:block;overflow:visible}
-  .replay{position:absolute;right:0;top:0;font-family:var(--mono);font-size:11px;color:var(--mute);background:none;border:0;cursor:pointer;padding:4px}
-  .replay:hover{color:var(--ink)}
-  .mono{font-family:var(--mono)}
+  /* ---------- stage ---------- */
+  .stage{position:relative;display:grid;min-height:520px}
+  .scene{grid-area:1/1;align-self:start}
+  .cap{font-size:15px;font-weight:600;color:var(--soft);margin-bottom:22px;min-height:1.4em}
+  .cap b{color:var(--ink)}
 
-  /* footer strip: expertise */
-  .proof{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);margin-bottom:28px}
-  .proof div{padding:18px 18px 0 0;font-size:14px;line-height:1.5;color:#3A3A3A;font-weight:500}
-  .proof b{display:block;font-family:var(--mono);font-size:11px;color:var(--ink);letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px 20px;font-size:15px;font-weight:500}
+  .grid li{padding:5px 0;white-space:nowrap;transition:color .18s}
+  .grid li.off{color:var(--off)}
+  .excel{margin-top:30px;padding:18px 20px;border:1.5px dashed var(--ink);opacity:0;transition:opacity .4s}
+  .excel.on{opacity:1}
+  .excel p{font-size:14px;font-weight:600;color:var(--soft);margin-bottom:10px}
+  .excel ul{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:15px;font-weight:600}
 
-  @media (max-width:880px){
+  .mark{font-size:clamp(30px,2.8vw,42px);font-weight:800;letter-spacing:-0.04em;margin-bottom:18px;opacity:0;line-height:1}
+  .mark .d{display:inline-block;width:.3em;height:.3em;border-radius:50%;background:var(--red);margin-right:.04em;visibility:hidden}
+  .final li{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 18px;padding:9px 0;border-bottom:1.5px solid var(--ink);opacity:0}
+  .final li:first-child{border-top:1.5px solid var(--ink)}
+  .final .n{font-size:clamp(22px,1.9vw,28px);font-weight:700;letter-spacing:-0.03em;position:relative}
+  .final .ai{font-size:15px;font-weight:500;color:var(--soft);opacity:0;transition:opacity .4s}
+  .final .ai::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:8px;vertical-align:1px}
+  .final .ai.on{opacity:1}
+  .sum{margin-top:18px;font-size:15px;font-weight:600;opacity:0;transition:opacity .4s}
+  .sum.on{opacity:1}
+
+  .dot{position:absolute;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--red);
+       opacity:0;pointer-events:none;z-index:3}
+  .ghost{position:absolute;white-space:nowrap;transform-origin:0 0;pointer-events:none;z-index:2;font-weight:600}
+  .again{position:absolute;right:0;bottom:-36px;background:none;border:0;font:inherit;font-size:14px;font-weight:600;color:var(--soft);
+         cursor:pointer;text-decoration:underline;text-underline-offset:5px}
+  .again:hover{color:var(--ink)}
+
+  @media (max-width:960px){
+    main{grid-template-columns:1fr;align-items:start}
+    .stage{min-height:0;margin-bottom:48px}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media (max-width:520px){
     header{height:68px}
     .logo img{height:20px}
-    nav{gap:14px;font-size:13px}
-    nav .cta{padding:5px 12px}
-    .hero{grid-template-columns:1fr;gap:8px;padding-top:8px}
-    .stage{order:-1;max-width:520px;width:100%;margin:0 auto 28px}
-    .eyebrow{margin-bottom:16px}
-    .proof{grid-template-columns:1fr}
-    .proof div{padding:14px 0 0}
+    nav{font-size:14px;gap:16px}
+    .grid{font-size:14px;gap:0 14px}
+    .grid li{padding:4px 0}
   }
-  @media (max-width:420px){ nav a:not(.cta){display:none} }
 </style>
 </head>
 <body>
 <div class="page">
   <header>
-    <a class="logo" href="/" aria-label=".mate 홈"><img src="assets/logo.png" alt=".mate"></a>
-    <nav>
+    <a class="logo" href="/"><img src="assets/logo.png" alt=".mate 홈"></a>
+    <nav aria-label="주 메뉴">
       <a href="/ax">AX전환?</a>
       <a href="/work">포트폴리오</a>
-      <a class="cta" href="/contact">문의하기</a>
+      <a href="/contact">문의하기</a>
     </nav>
   </header>
 
-  <main class="hero">
+  <main>
     <section>
-      <p class="eyebrow"><b>.ax</b> SaaS → 자체 AX 시스템 전환</p>
-      <h1>빌려 쓰던 SaaS에서,<br>우리 회사 시스템으로<span class="dot">.</span></h1>
-      <p class="lead">처음부터 <strong>AI가 일하도록</strong> 설계하고, 운영까지 책임집니다.<br>약정이 끝나면 <strong>소스코드는 고객사의 것</strong>입니다.</p>
-      <div class="actions">
-        <a class="btn" href="/contact"><i></i>무료 전환 진단받기</a>
-        <a class="link" href="/ax#price">월 99만원부터 →</a>
+      <h1>사업이 커지면,<br>SaaS가 좁아집니다.</h1>
+      <p class="lead"><b>.ax</b>는 우리 사업 방식대로 시스템을 다시 짓고, 그 안에서 AI가 실제 업무를 맡게 합니다. 사업이 커지면 시스템도 함께 커집니다.</p>
+      <div class="act">
+        <a class="btn" href="/contact">업무 진단 신청하기</a>
+        <a class="txt" href="/ax">AX전환이 뭔가요?</a>
       </div>
-      <div class="lines" aria-label="라인업">
-        <a href="/ax#commerce"><span>.</span>ax commerce</a>
-        <a href="/ax#erp"><span>.</span>ax erp</a>
-        <a href="/ax#crm"><span>.</span>ax crm</a>
-        <a href="/ax#edu"><span>.</span>ax edu</a>
-      </div>
+      <nav class="lines" aria-label=".ax 라인업">
+        <a href="/ax#commerce" aria-current="true"><i>.</i>ax commerce</a>
+        <a href="/ax#erp"><i>.</i>ax erp</a>
+        <a href="/ax#crm"><i>.</i>ax crm</a>
+        <a href="/ax#edu"><i>.</i>ax edu</a>
+      </nav>
     </section>
 
-    <div class="stage" aria-hidden="true">
-      <svg id="svg" viewBox="0 0 600 520"></svg>
-      <button class="replay" id="replay" type="button">↻ replay</button>
+    <div class="stage" id="stage" role="img"
+         aria-label="쇼핑몰 SaaS 관리자 메뉴 36개 중 25개는 쓰지 않고, 엑셀로 하던 업무 4개가 더해져 우리 회사 메뉴 8개가 됩니다. 그중 5개는 AI가 맡습니다.">
+      <div class="scene" id="sa" aria-hidden="true">
+        <p class="cap" id="capA"></p>
+        <ul class="grid" id="grid"></ul>
+        <div class="excel" id="excel">
+          <p>메뉴에 없어서 엑셀로 하는 일</p>
+          <ul id="xl"></ul>
+        </div>
+      </div>
+      <div class="scene" id="sb" aria-hidden="true">
+        <p class="mark" id="mark"><span class="d" id="markDot"></span>ax commerce</p>
+        <ol class="final" id="final"></ol>
+        <p class="sum" id="sum">우리 회사 메뉴 8개, 그중 5개는 AI가 맡습니다.</p>
+      </div>
+      <span class="dot" id="dot"></span>
+      <button class="again" id="again" type="button">처음부터 다시 보기</button>
     </div>
   </main>
-
-  <footer class="proof">
-    <div><b>01 · 진단</b>지금 쓰는 SaaS 비용과 반복 업무를 숫자로 분석합니다.</div>
-    <div><b>02 · 전환</b>회원·주문·결제·검색 순위까지, 멈추지 않고 옮깁니다.</div>
-    <div><b>03 · 운영</b>AI 자동화와 유지보수를 하나의 구독으로 책임집니다.</div>
-  </footer>
 </div>
 
 <script>
 (() => {
-  const NS = "http://www.w3.org/2000/svg";
-  const svg = document.getElementById("svg");
-  const RED = "#D82E28", INK = "#0A0A0A", GHOST = "#EFEFEF", MUTE = "#B5B5B5";
+  // ---- content (쇼핑몰 기준) ----
+  const GENERIC = ["주문 관리","취소·교환·반품","배송 관리","상품 관리","상품 진열","카테고리",
+    "재고 관리","회원 관리","회원 등급","적립금","쿠폰","이벤트",
+    "기획전","게시판","블로그","상품 후기","1:1 문의","메일 발송",
+    "SMS 발송","푸시 알림","정기배송","오픈마켓 연동","해외몰","다국어 설정",
+    "디자인 편집","팝업 관리","배너 관리","SEO 설정","통계","매출 분석",
+    "방문자 분석","정산 관리","세금계산서","부가서비스","앱 스토어","운영자 권한"];
+  const EXCEL = ["도매 거래처별 단가","공동구매 정산","채널별 재고 통합","맞춤 제작 주문"];
+  const FINAL = [
+    { n:"주문 처리",       from:["주문 관리","배송 관리"],                  ai:"채널마다 들어온 주문을 모아 자동으로 분류합니다" },
+    { n:"채널 통합 재고",   from:["재고 관리","오픈마켓 연동","해외몰","채널별 재고 통합"], ai:"품절되기 전에 발주를 제안합니다" },
+    { n:"도매 거래처 단가", from:["도매 거래처별 단가"] },
+    { n:"맞춤 제작 주문",   from:["맞춤 제작 주문"] },
+    { n:"상품 관리",       from:["상품 관리"],                            ai:"상세페이지 초안과 해외몰 번역을 씁니다" },
+    { n:"공동구매 정산",    from:["공동구매 정산"],                         ai:"판매 데이터로 정산서를 작성합니다" },
+    { n:"고객 응대",       from:["1:1 문의","상품 후기","회원 관리"],        ai:"문의를 요약하고 답변 초안을 붙입니다" },
+    { n:"매출·정산",       from:["정산 관리","매출 분석"] },
+  ];
+  const USED = new Set(FINAL.flatMap(f => f.from));
+
+  const $ = id => document.getElementById(id);
+  const stage = $("stage"), grid = $("grid"), xl = $("xl"), final = $("final"), dot = $("dot");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let run = 0;
 
-  const el = (tag, attrs = {}, parent = svg) => {
-    const n = document.createElementNS(NS, tag);
-    for (const k in attrs) n.setAttribute(k, attrs[k]);
-    parent.appendChild(n); return n;
-  };
-  const ease = {
-    io: p => p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2,
-    out: p => 1 - Math.pow(1 - p, 3),
-    lin: p => p,
-    back: p => { const c = 1.7; return 1 + (c+1)*Math.pow(p-1,3) + c*Math.pow(p-1,2); }
-  };
-  const tween = (dur, fn, e = ease.io, id = run) => new Promise((res, rej) => {
-    const s = performance.now();
-    const f = t => {
-      if (id !== run) return rej("stop");
-      const p = Math.min(1, (t - s) / dur); fn(e(p));
-      p < 1 ? requestAnimationFrame(f) : res();
-    };
-    requestAnimationFrame(f);
-  });
-  const wait = (ms, id = run) => new Promise((res, rej) => setTimeout(() => id === run ? res() : rej("stop"), ms));
-  const lerp = (a, b, p) => a + (b - a) * p;
-
-  // ---- geometry
-  const BOX = { x: 70, y: 70, w: 300, h: 270 };
-  const HUB = { x: 300, y: 262 };
-  const NODES = [
-    { k: "주문", x: 112, y: 108, w: 76 },
-    { k: "재고", x: 488, y: 96,  w: 76 },
-    { k: "정산", x: 512, y: 300, w: 76 },
-    { k: "상담", x: 360, y: 452, w: 76 },
-    { k: "고객", x: 92,  y: 388, w: 76 },
-  ];
-  const LOGS = [
-    ["주문", "재고", "주문 #1042 → 재고 자동 차감"],
-    ["고객", "상담", "고객 문의 → 요약 후 담당자 배정"],
-    ["주문", "정산", "주문 마감 → 정산 리포트 생성"],
-    ["재고", "주문", "재고 부족 예측 → 발주 제안"],
-    ["상담", "고객", "상담 종료 → 고객 등급 갱신"],
-    ["정산", "고객", "미수금 감지 → 안내 메시지 발송"],
-  ];
+  const wait = (ms, id) => new Promise((ok, no) => setTimeout(() => id === run ? ok() : no("stop"), ms));
+  const local = el => { const s = stage.getBoundingClientRect(), r = el.getBoundingClientRect();
+    return { x: r.left - s.left, y: r.top - s.top, w: r.width, h: r.height }; };
+  const anim = (el, kf, o) => el.animate(kf, { fill: "forwards", easing: "cubic-bezier(.65,0,.35,1)", ...o }).finished;
+  let dotAt = { x: 0, y: 0 };
+  const moveDot = (x, y, d) => { const a = anim(dot, [{ transform:`translate(${dotAt.x}px,${dotAt.y}px)` }, { transform:`translate(${x}px,${y}px)` }], { duration: d }); dotAt = { x, y }; return a; };
 
   function build() {
-    svg.innerHTML = "";
-    const g = {};
-    // rented template box
-    g.box = el("g");
-    el("text", { x: BOX.x, y: BOX.y - 14, class: "mono", "font-size": 11, fill: MUTE }, g.box).textContent = "rented saas · template";
-    g.frame = el("rect", { x: BOX.x, y: BOX.y, width: BOX.w, height: BOX.h, rx: 8, fill: "none", stroke: MUTE, "stroke-width": 1.5, "stroke-dasharray": "5 5" }, g.box);
-    g.tpl = [];
-    const t = (x, y, w, h) => g.tpl.push(el("rect", { x, y, width: w, height: h, rx: 3, fill: GHOST }, g.box));
-    t(90, 90, 260, 16);
-    [90, 178, 266].forEach(x => { t(x, 122, 84, 62); t(x, 192, 60, 8); t(x, 206, 44, 8); });
-    t(90, 236, 260, 10); t(90, 254, 200, 10); t(90, 272, 230, 10); t(90, 300, 120, 22);
-
-    g.links = el("g"); g.trail = el("path", { fill: "none", stroke: RED, "stroke-width": 1.5, "stroke-dasharray": "2 5", opacity: 0 });
-    g.nodes = el("g");
-    g.tokens = el("g");
-    // hub wordmark ("ax" next to the dot)
-    g.ax = el("text", { x: HUB.x + 16, y: HUB.y + 11, "font-size": 34, "font-weight": 800, fill: INK, opacity: 0, "letter-spacing": "-1.5", stroke: "#fff", "stroke-width": 8, "paint-order": "stroke" });
-    g.ax.textContent = "ax";
-    g.ring = el("circle", { cx: HUB.x, cy: HUB.y, r: 11, fill: "none", stroke: RED, "stroke-width": 1.5, opacity: 0 });
-    g.dot = el("circle", { cx: 220, cy: 300, r: 11, fill: RED });
-    // log
-    g.log = el("g", { transform: "translate(0,512)" });
-    return g;
+    grid.innerHTML = GENERIC.map(t => `<li>${t}</li>`).join("");
+    xl.innerHTML = EXCEL.map(t => `<li>${t}</li>`).join("");
+    final.innerHTML = FINAL.map(f => `<li><span class="n">${f.n}</span>${f.ai ? `<span class="ai">${f.ai}</span>` : ""}</li>`).join("");
+    stage.querySelectorAll(".ghost").forEach(g => g.remove());
+    $("sa").style.opacity = 1; $("excel").classList.remove("on");
+    $("mark").style.opacity = 0; $("markDot").style.visibility = "hidden";
+    $("sum").classList.remove("on");
+    dot.getAnimations().forEach(a => a.cancel()); dot.style.opacity = 0;
+    [...final.children].forEach(li => li.style.opacity = 0);
   }
 
-  const setDot = (g, x, y) => { g.dot.setAttribute("cx", x); g.dot.setAttribute("cy", y); };
-  const pos = g => [+g.dot.getAttribute("cx"), +g.dot.getAttribute("cy")];
-  const move = (g, x, y, d, e = ease.io) => { const [x0, y0] = pos(g); return tween(d, p => setDot(g, lerp(x0, x, p), lerp(y0, y, p)), e); };
-  const squash = g => tween(220, p => g.dot.setAttribute("r", 11 + Math.sin(p * Math.PI) * -3), ease.lin);
-
-  function makeNode(g, n) {
-    const grp = el("g", { transform: `translate(${n.x},${n.y}) scale(0)` }, g.nodes);
-    el("rect", { x: -n.w/2, y: -19, width: n.w, height: 38, rx: 19, fill: INK }, grp);
-    const tx = el("text", { x: 0, y: 6, "text-anchor": "middle", "font-size": 16, "font-weight": 700, fill: "#fff" }, grp);
-    tx.textContent = n.k;
-    n.el = grp; n.rect = grp.firstChild;
-    return grp;
-  }
-
-  function log(g, text) {
-    const rows = [...g.log.children];
-    rows.forEach(r => {
-      const y = +r.dataset.y - 18; r.dataset.y = y;
-      r.setAttribute("transform", `translate(0,${y})`);
-      r.setAttribute("opacity", Math.max(0, 1 + y / 54));
-      if (y < -54) r.remove();
-    });
-    const row = el("g", { transform: "translate(0,0)" }, g.log); row.dataset.y = 0;
-    el("circle", { cx: 4, cy: -4, r: 3, fill: RED }, row);
-    const t = el("text", { x: 14, y: 0, class: "mono", "font-size": 11, fill: INK }, row);
-    t.textContent = text;
+  function finalState() {
+    $("sa").style.opacity = 0; $("mark").style.opacity = 1; $("markDot").style.visibility = "visible";
+    [...final.children].forEach(li => li.style.opacity = 1);
+    final.querySelectorAll(".ai").forEach(a => a.classList.add("on"));
+    $("sum").classList.add("on");
   }
 
   async function play() {
     const id = ++run;
-    const g = build();
+    build();
+    if (reduce) return finalState();
+    const capA = $("capA");
+    const items = [...grid.children], byText = {};
+    items.forEach(li => byText[li.textContent] = li);
 
-    if (reduce) { return finalState(g); }
+    capA.innerHTML = "쇼핑몰 SaaS 관리자 메뉴 <b>36개</b>";
+    await anim($("sa"), [{ opacity: 0 }, { opacity: 1 }], { duration: 500 });
+    await wait(900, id);
 
-    // 1. trapped: bounce inside the template
+    // 1. red dot sweeps the menu, switching off what the business never uses
+    const unused = items.filter(li => !USED.has(li.textContent));
+    const p0 = local(unused[0]); dotAt = { x: p0.x - 14, y: p0.y + p0.h / 2 };
+    dot.style.opacity = 1;
+    await anim(dot, [{ transform:`translate(${dotAt.x}px,${dotAt.y}px) scale(0)` }, { transform:`translate(${dotAt.x}px,${dotAt.y}px) scale(1)` }], { duration: 220 });
+    let off = 0;
+    for (const li of unused) {
+      const r = local(li);
+      await moveDot(r.x - 14, r.y + r.h / 2, 85);
+      li.classList.add("off"); off++;
+      capA.innerHTML = `쇼핑몰 SaaS 관리자 메뉴 36개, 그중 쓰지 않는 메뉴 <b>${off}개</b>`;
+    }
     await wait(500, id);
-    const hits = [[358, 180, "r"], [170, 82, "t"], [82, 250, "l"], [250, 328, "b"], [358, 236, "r"]];
-    for (const [x, y] of hits) {
-      await move(g, x, y, 520, ease.lin);
-      g.frame.setAttribute("stroke", INK);
-      squash(g).catch(()=>{});
-      setTimeout(() => g.frame.setAttribute("stroke", MUTE), 140);
-    }
 
-    // 2. break out: frame tears, template collapses
-    await move(g, 344, 236, 160, ease.out);
-    g.frame.setAttribute("stroke", RED);
-    await move(g, 420, 250, 260, ease.out);
-    const tpl = g.tpl;
-    tween(700, p => {
-      g.frame.setAttribute("opacity", 1 - p);
-      g.box.firstChild.setAttribute("opacity", 1 - p);
-      tpl.forEach((r, i) => {
-        const q = Math.max(0, Math.min(1, p * 1.6 - i * 0.03));
-        r.setAttribute("transform", `translate(0,${q * 40})`); r.setAttribute("opacity", 1 - q);
+    // 2. the work that lives outside the system
+    $("excel").classList.add("on");
+    const xr = local($("excel"));
+    await moveDot(xr.x + xr.w - 2, xr.y + 2, 380);
+    capA.innerHTML = "정작 필요한 일은 <b>메뉴에 없습니다</b>";
+    await wait(1600, id);
+
+    // 3. rebuild: used menus + excel work fold into the company's own menu
+    const sources = {};
+    items.forEach(li => sources[li.textContent] = li);
+    [...xl.children].forEach(li => sources[li.textContent] = li);
+    const finals = [...final.children];
+    const ghosts = [];
+    FINAL.forEach((f, i) => {
+      const target = finals[i].querySelector(".n"), tr = local(target);
+      const tSize = parseFloat(getComputedStyle(target).fontSize);
+      f.from.forEach(t => {
+        const src = sources[t], sr = local(src);
+        const g = document.createElement("span");
+        g.className = "ghost"; g.textContent = t;
+        const sSize = parseFloat(getComputedStyle(src).fontSize);
+        g.style.cssText = `left:${sr.x}px;top:${sr.y + (src.closest(".grid") ? 5 : 0)}px;font-size:${sSize}px`;
+        stage.appendChild(g);
+        ghosts.push({ g, dx: tr.x - sr.x, dy: tr.y - sr.y - (src.closest(".grid") ? 5 : 0), s: tSize / sSize, i, multi: f.from.length > 1 });
       });
-    }, ease.io).catch(()=>{});
-    await wait(300, id);
-
-    // 3. draw the company's own system: dot visits each node
-    let d = `M420 250`; g.trail.setAttribute("opacity", .7);
-    for (const n of NODES) {
-      const [x0, y0] = pos(g);
-      makeNode(g, n);
-      await tween(420, p => {
-        const x = lerp(x0, n.x, p), y = lerp(y0, n.y, p);
-        setDot(g, x, y); g.trail.setAttribute("d", `${d} L${x} ${y}`);
-      }, ease.io);
-      d += ` L${n.x} ${n.y}`;
-      tween(380, p => n.el.setAttribute("transform", `translate(${n.x},${n.y}) scale(${p})`), ease.back).catch(()=>{});
-      await wait(90, id);
-    }
-
-    // 4. dot becomes the hub, links grow from it
-    await move(g, HUB.x, HUB.y, 520);
-    tween(400, p => g.trail.setAttribute("opacity", .7 * (1 - p))).catch(()=>{});
-    NODES.forEach(n => n.line = el("line", { x1: HUB.x, y1: HUB.y, x2: HUB.x, y2: HUB.y, stroke: INK, "stroke-width": 1.5 }, g.links));
-    await tween(520, p => NODES.forEach(n => {
-      n.line.setAttribute("x2", lerp(HUB.x, n.x, p)); n.line.setAttribute("y2", lerp(HUB.y, n.y, p));
-    }), ease.out);
-    await tween(360, p => g.ax.setAttribute("opacity", p));
-
-    // 5. the system runs by itself
-    loop(g, id);
-  }
-
-  function finalState(g) {
-    g.box.remove(); setDot(g, HUB.x, HUB.y); g.ax.setAttribute("opacity", 1);
-    NODES.forEach(n => {
-      el("line", { x1: HUB.x, y1: HUB.y, x2: n.x, y2: n.y, stroke: INK, "stroke-width": 1.5 }, g.links);
-      makeNode(g, n).setAttribute("transform", `translate(${n.x},${n.y})`);
     });
-    LOGS.slice(0, 3).forEach(l => log(g, l[2]));
+    anim($("sa"), [{ opacity: 1 }, { opacity: 0 }], { duration: 300 });
+    const tm = local($("markDot"));
+    moveDot(tm.x + tm.w / 2, tm.y + tm.h / 2, 900);
+    finals.forEach((li, i) => anim(li, [{ opacity: 0 }, { opacity: 1 }], { duration: 450, delay: i * 70 + 600 })
+      .then(() => li.style.opacity = 1));
+    await Promise.all(ghosts.map(({ g, dx, dy, s, i }) =>
+      anim(g, [
+        { transform: "translate(0,0) scale(1)", opacity: 1 },
+        { transform: `translate(${dx}px,${dy}px) scale(${s})`, opacity: 1, offset: .8 },
+        { transform: `translate(${dx}px,${dy}px) scale(${s})`, opacity: 0 }
+      ], { duration: 1050, delay: i * 70 })));
+    ghosts.forEach(({ g }) => g.remove());
+    $("mark").style.opacity = 1;
+    $("markDot").style.visibility = "visible"; dot.style.opacity = 0;
+    await wait(500, id);
+
+    // 4. AI takes over specific work, one item at a time
+    for (const a of final.querySelectorAll(".ai")) { a.classList.add("on"); await wait(380, id); }
+    $("sum").classList.add("on");
   }
 
-  async function loop(g, id) {
-    const byK = Object.fromEntries(NODES.map(n => [n.k, n]));
-    let i = 0;
-    try {
-      while (id === run) {
-        const [a, b, text] = LOGS[i++ % LOGS.length];
-        const A = byK[a], B = byK[b];
-        const tok = el("rect", { width: 9, height: 9, x: -4.5, y: -4.5, fill: INK, transform: `translate(${A.x},${A.y})` }, g.tokens);
-        A.rect.setAttribute("fill", RED);
-        await tween(560, p => tok.setAttribute("transform", `translate(${lerp(A.x, HUB.x, p)},${lerp(A.y, HUB.y, p)})`));
-        A.rect.setAttribute("fill", INK);
-        // hub processes (the AI step)
-        tok.setAttribute("fill", RED);
-        tween(500, p => { g.ring.setAttribute("r", 11 + p * 22); g.ring.setAttribute("opacity", 1 - p); }, ease.out).catch(()=>{});
-        await wait(160, id);
-        await tween(560, p => tok.setAttribute("transform", `translate(${lerp(HUB.x, B.x, p)},${lerp(HUB.y, B.y, p)})`));
-        tok.remove();
-        B.rect.setAttribute("fill", RED);
-        log(g, text);
-        await wait(380, id);
-        B.rect.setAttribute("fill", INK);
-        await wait(320, id);
-      }
-    } catch (_) {}
-  }
-
-  document.getElementById("replay").addEventListener("click", () => play().catch(()=>{}));
-  play().catch(()=>{});
+  $("again").addEventListener("click", () => play().catch(() => {}));
+  // start when the stage is actually on screen (on phones it sits below the headline)
+  build();
+  const io = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { io.disconnect(); play().catch(() => {}); }
+  }, { threshold: 0.35 });
+  io.observe(stage);
 })();
 </script>
 </body>
