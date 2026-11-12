@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>.mate — SaaS에서 우리 회사 시스템으로</title>
+<meta name="description" content="빌려 쓰던 SaaS를 AI가 일하는 자체 시스템으로. 구축부터 운영까지 하나의 구독, .ax">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --ink:#0A0A0A; --paper:#FFFFFF; --red:#D82E28;
+    --mute:#8A8A8A; --line:#E6E6E6; --ghost:#EFEFEF;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--paper);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;
+       -webkit-font-smoothing:antialiased;letter-spacing:-0.02em;word-break:keep-all}
+  a{color:inherit;text-decoration:none}
+
+  .page{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;padding:0 clamp(16px,4vw,56px)}
+
+  /* header */
+  header{display:flex;align-items:center;justify-content:space-between;height:84px}
+  .logo img{height:26px;display:block}
+  nav{display:flex;gap:clamp(16px,3vw,40px);align-items:center;font-weight:600;font-size:15px}
+  nav a{position:relative;padding:6px 0}
+  nav a::after{content:"";position:absolute;left:50%;bottom:-4px;width:5px;height:5px;border-radius:50%;
+       background:var(--red);transform:translateX(-50%) scale(0);transition:transform .2s}
+  nav a:hover::after{transform:translateX(-50%) scale(1)}
+  nav .cta{border:2px solid var(--ink);border-radius:999px;padding:7px 16px}
+  nav .cta::after{display:none}
+  nav .cta:hover{background:var(--ink);color:var(--paper)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,4vw,64px);align-items:center;padding:24px 0}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--mute);margin-bottom:28px;display:flex;gap:10px;align-items:center}
+  .eyebrow b{color:var(--ink);font-weight:600}
+  h1{font-size:clamp(34px,4.3vw,66px);line-height:1.08;font-weight:800;letter-spacing:-0.045em}
+  h1 .dot{color:var(--red)}
+  .lead{margin-top:28px;font-size:clamp(16px,1.35vw,19px);line-height:1.65;color:#3A3A3A;max-width:30em;font-weight:500}
+  .lead strong{color:var(--ink);font-weight:700}
+  .actions{margin-top:40px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);font-weight:700;
+       padding:16px 26px;border-radius:999px;font-size:16px;transition:background .2s}
+  .btn:hover{background:var(--red)}
+  .btn i{width:8px;height:8px;border-radius:50%;background:var(--red);transition:background .2s}
+  .btn:hover i{background:var(--paper)}
+  .link{font-weight:700;border-bottom:2px solid var(--ink);padding-bottom:2px}
+  .lines{margin-top:44px;display:flex;flex-wrap:wrap;gap:8px}
+  .lines a{font-weight:700;font-size:14px;border:1.5px solid var(--line);border-radius:999px;padding:7px 14px;transition:border-color .2s}
+  .lines a:hover{border-color:var(--ink)}
+  .lines a span{color:var(--red)}
+
+  /* stage */
+  .stage{position:relative;width:100%;aspect-ratio:600/520}
+  .stage svg{width:100%;height:100%;display:block;overflow:visible}
+  .replay{position:absolute;right:0;top:0;font-family:var(--mono);font-size:11px;color:var(--mute);background:none;border:0;cursor:pointer;padding:4px}
+  .replay:hover{color:var(--ink)}
+  .mono{font-family:var(--mono)}
+
+  /* footer strip: expertise */
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);margin-bottom:28px}
+  .proof div{padding:18px 18px 0 0;font-size:14px;line-height:1.5;color:#3A3A3A;font-weight:500}
+  .proof b{display:block;font-family:var(--mono);font-size:11px;color:var(--ink);letter-spacing:.04em;margin-bottom:6px;font-weight:600}
+
+  @media (max-width:880px){
+    header{height:68px}
+    .logo img{height:20px}
+    nav{gap:14px;font-size:13px}
+    nav .cta{padding:5px 12px}
+    .hero{grid-template-columns:1fr;gap:8px;padding-top:8px}
+    .stage{order:-1;max-width:520px;width:100%;margin:0 auto 28px}
+    .eyebrow{margin-bottom:16px}
+    .proof{grid-template-columns:1fr}
+    .proof div{padding:14px 0 0}
+  }
+  @media (max-width:420px){ nav a:not(.cta){display:none} }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <a class="logo" href="/" aria-label=".mate 홈"><img src="assets/logo.png" alt=".mate"></a>
+    <nav>
+      <a href="/ax">AX전환?</a>
+      <a href="/work">포트폴리오</a>
+      <a class="cta" href="/contact">문의하기</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <section>
+      <p class="eyebrow"><b>.ax</b> SaaS → 자체 AX 시스템 전환</p>
+      <h1>빌려 쓰던 SaaS에서,<br>우리 회사 시스템으로<span class="dot">.</span></h1>
+      <p class="lead">처음부터 <strong>AI가 일하도록</strong> 설계하고, 운영까지 책임집니다.<br>약정이 끝나면 <strong>소스코드는 고객사의 것</strong>입니다.</p>
+      <div class="actions">
+        <a class="btn" href="/contact"><i></i>무료 전환 진단받기</a>
+        <a class="link" href="/ax#price">월 99만원부터 →</a>
+      </div>
+      <div class="lines" aria-label="라인업">
+        <a href="/ax#commerce"><span>.</span>ax commerce</a>
+        <a href="/ax#erp"><span>.</span>ax erp</a>
+        <a href="/ax#crm"><span>.</span>ax crm</a>
+        <a href="/ax#edu"><span>.</span>ax edu</a>
+      </div>
+    </section>
+
+    <div class="stage" aria-hidden="true">
+      <svg id="svg" viewBox="0 0 600 520"></svg>
+      <button class="replay" id="replay" type="button">↻ replay</button>
+    </div>
+  </main>
+
+  <footer class="proof">
+    <div><b>01 · 진단</b>지금 쓰는 SaaS 비용과 반복 업무를 숫자로 분석합니다.</div>
+    <div><b>02 · 전환</b>회원·주문·결제·검색 순위까지, 멈추지 않고 옮깁니다.</div>
+    <div><b>03 · 운영</b>AI 자동화와 유지보수를 하나의 구독으로 책임집니다.</div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("svg");
+  const RED = "#D82E28", INK = "#0A0A0A", GHOST = "#EFEFEF", MUTE = "#B5B5B5";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let run = 0;
+
+  const el = (tag, attrs = {}, parent = svg) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    parent.appendChild(n); return n;
+  };
+  const ease = {
+    io: p => p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2,
+    out: p => 1 - Math.pow(1 - p, 3),
+    lin: p => p,
+    back: p => { const c = 1.7; return 1 + (c+1)*Math.pow(p-1,3) + c*Math.pow(p-1,2); }
+  };
+  const tween = (dur, fn, e = ease.io, id = run) => new Promise((res, rej) => {
+    const s = performance.now();
+    const f = t => {
+      if (id !== run) return rej("stop");
+      const p = Math.min(1, (t - s) / dur); fn(e(p));
+      p < 1 ? requestAnimationFrame(f) : res();
+    };
+    requestAnimationFrame(f);
+  });
+  const wait = (ms, id = run) => new Promise((res, rej) => setTimeout(() => id === run ? res() : rej("stop"), ms));
+  const lerp = (a, b, p) => a + (b - a) * p;
+
+  // ---- geometry
+  const BOX = { x: 70, y: 70, w: 300, h: 270 };
+  const HUB = { x: 300, y: 262 };
+  const NODES = [
+    { k: "주문", x: 112, y: 108, w: 76 },
+    { k: "재고", x: 488, y: 96,  w: 76 },
+    { k: "정산", x: 512, y: 300, w: 76 },
+    { k: "상담", x: 360, y: 452, w: 76 },
+    { k: "고객", x: 92,  y: 388, w: 76 },
+  ];
+  const LOGS = [
+    ["주문", "재고", "주문 #1042 → 재고 자동 차감"],
+    ["고객", "상담", "고객 문의 → 요약 후 담당자 배정"],
+    ["주문", "정산", "주문 마감 → 정산 리포트 생성"],
+    ["재고", "주문", "재고 부족 예측 → 발주 제안"],
+    ["상담", "고객", "상담 종료 → 고객 등급 갱신"],
+    ["정산", "고객", "미수금 감지 → 안내 메시지 발송"],
+  ];
+
+  function build() {
+    svg.innerHTML = "";
+    const g = {};
+    // rented template box
+    g.box = el("g");
+    el("text", { x: BOX.x, y: BOX.y - 14, class: "mono", "font-size": 11, fill: MUTE }, g.box).textContent = "rented saas · template";
+    g.frame = el("rect", { x: BOX.x, y: BOX.y, width: BOX.w, height: BOX.h, rx: 8, fill: "none", stroke: MUTE, "stroke-width": 1.5, "stroke-dasharray": "5 5" }, g.box);
+    g.tpl = [];
+    const t = (x, y, w, h) => g.tpl.push(el("rect", { x, y, width: w, height: h, rx: 3, fill: GHOST }, g.box));
+    t(90, 90, 260, 16);
+    [90, 178, 266].forEach(x => { t(x, 122, 84, 62); t(x, 192, 60, 8); t(x, 206, 44, 8); });
+    t(90, 236, 260, 10); t(90, 254, 200, 10); t(90, 272, 230, 10); t(90, 300, 120, 22);
+
+    g.links = el("g"); g.trail = el("path", { fill: "none", stroke: RED, "stroke-width": 1.5, "stroke-dasharray": "2 5", opacity: 0 });
+    g.nodes = el("g");
+    g.tokens = el("g");
+    // hub wordmark ("ax" next to the dot)
+    g.ax = el("text", { x: HUB.x + 16, y: HUB.y + 11, "font-size": 34, "font-weight": 800, fill: INK, opacity: 0, "letter-spacing": "-1.5", stroke: "#fff", "stroke-width": 8, "paint-order": "stroke" });
+    g.ax.textContent = "ax";
+    g.ring = el("circle", { cx: HUB.x, cy: HUB.y, r: 11, fill: "none", stroke: RED, "stroke-width": 1.5, opacity: 0 });
+    g.dot = el("circle", { cx: 220, cy: 300, r: 11, fill: RED });
+    // log
+    g.log = el("g", { transform: "translate(0,512)" });
+    return g;
+  }
+
+  const setDot = (g, x, y) => { g.dot.setAttribute("cx", x); g.dot.setAttribute("cy", y); };
+  const pos = g => [+g.dot.getAttribute("cx"), +g.dot.getAttribute("cy")];
+  const move = (g, x, y, d, e = ease.io) => { const [x0, y0] = pos(g); return tween(d, p => setDot(g, lerp(x0, x, p), lerp(y0, y, p)), e); };
+  const squash = g => tween(220, p => g.dot.setAttribute("r", 11 + Math.sin(p * Math.PI) * -3), ease.lin);
+
+  function makeNode(g, n) {
+    const grp = el("g", { transform: `translate(${n.x},${n.y}) scale(0)` }, g.nodes);
+    el("rect", { x: -n.w/2, y: -19, width: n.w, height: 38, rx: 19, fill: INK }, grp);
+    const tx = el("text", { x: 0, y: 6, "text-anchor": "middle", "font-size": 16, "font-weight": 700, fill: "#fff" }, grp);
+    tx.textContent = n.k;
+    n.el = grp; n.rect = grp.firstChild;
+    return grp;
+  }
+
+  function log(g, text) {
+    const rows = [...g.log.children];
+    rows.forEach(r => {
+      const y = +r.dataset.y - 18; r.dataset.y = y;
+      r.setAttribute("transform", `translate(0,${y})`);
+      r.setAttribute("opacity", Math.max(0, 1 + y / 54));
+      if (y < -54) r.remove();
+    });
+    const row = el("g", { transform: "translate(0,0)" }, g.log); row.dataset.y = 0;
+    el("circle", { cx: 4, cy: -4, r: 3, fill: RED }, row);
+    const t = el("text", { x: 14, y: 0, class: "mono", "font-size": 11, fill: INK }, row);
+    t.textContent = text;
+  }
+
+  async function play() {
+    const id = ++run;
+    const g = build();
+
+    if (reduce) { return finalState(g); }
+
+    // 1. trapped: bounce inside the template
+    await wait(500, id);
+    const hits = [[358, 180, "r"], [170, 82, "t"], [82, 250, "l"], [250, 328, "b"], [358, 236, "r"]];
+    for (const [x, y] of hits) {
+      await move(g, x, y, 520, ease.lin);
+      g.frame.setAttribute("stroke", INK);
+      squash(g).catch(()=>{});
+      setTimeout(() => g.frame.setAttribute("stroke", MUTE), 140);
+    }
+
+    // 2. break out: frame tears, template collapses
+    await move(g, 344, 236, 160, ease.out);
+    g.frame.setAttribute("stroke", RED);
+    await move(g, 420, 250, 260, ease.out);
+    const tpl = g.tpl;
+    tween(700, p => {
+      g.frame.setAttribute("opacity", 1 - p);
+      g.box.firstChild.setAttribute("opacity", 1 - p);
+      tpl.forEach((r, i) => {
+        const q = Math.max(0, Math.min(1, p * 1.6 - i * 0.03));
+        r.setAttribute("transform", `translate(0,${q * 40})`); r.setAttribute("opacity", 1 - q);
+      });
+    }, ease.io).catch(()=>{});
+    await wait(300, id);
+
+    // 3. draw the company's own system: dot visits each node
+    let d = `M420 250`; g.trail.setAttribute("opacity", .7);
+    for (const n of NODES) {
+      const [x0, y0] = pos(g);
+      makeNode(g, n);
+      await tween(420, p => {
+        const x = lerp(x0, n.x, p), y = lerp(y0, n.y, p);
+        setDot(g, x, y); g.trail.setAttribute("d", `${d} L${x} ${y}`);
+      }, ease.io);
+      d += ` L${n.x} ${n.y}`;
+      tween(380, p => n.el.setAttribute("transform", `translate(${n.x},${n.y}) scale(${p})`), ease.back).catch(()=>{});
+      await wait(90, id);
+    }
+
+    // 4. dot becomes the hub, links grow from it
+    await move(g, HUB.x, HUB.y, 520);
+    tween(400, p => g.trail.setAttribute("opacity", .7 * (1 - p))).catch(()=>{});
+    NODES.forEach(n => n.line = el("line", { x1: HUB.x, y1: HUB.y, x2: HUB.x, y2: HUB.y, stroke: INK, "stroke-width": 1.5 }, g.links));
+    await tween(520, p => NODES.forEach(n => {
+      n.line.setAttribute("x2", lerp(HUB.x, n.x, p)); n.line.setAttribute("y2", lerp(HUB.y, n.y, p));
+    }), ease.out);
+    await tween(360, p => g.ax.setAttribute("opacity", p));
+
+    // 5. the system runs by itself
+    loop(g, id);
+  }
+
+  function finalState(g) {
+    g.box.remove(); setDot(g, HUB.x, HUB.y); g.ax.setAttribute("opacity", 1);
+    NODES.forEach(n => {
+      el("line", { x1: HUB.x, y1: HUB.y, x2: n.x, y2: n.y, stroke: INK, "stroke-width": 1.5 }, g.links);
+      makeNode(g, n).setAttribute("transform", `translate(${n.x},${n.y})`);
+    });
+    LOGS.slice(0, 3).forEach(l => log(g, l[2]));
+  }
+
+  async function loop(g, id) {
+    const byK = Object.fromEntries(NODES.map(n => [n.k, n]));
+    let i = 0;
+    try {
+      while (id === run) {
+        const [a, b, text] = LOGS[i++ % LOGS.length];
+        const A = byK[a], B = byK[b];
+        const tok = el("rect", { width: 9, height: 9, x: -4.5, y: -4.5, fill: INK, transform: `translate(${A.x},${A.y})` }, g.tokens);
+        A.rect.setAttribute("fill", RED);
+        await tween(560, p => tok.setAttribute("transform", `translate(${lerp(A.x, HUB.x, p)},${lerp(A.y, HUB.y, p)})`));
+        A.rect.setAttribute("fill", INK);
+        // hub processes (the AI step)
+        tok.setAttribute("fill", RED);
+        tween(500, p => { g.ring.setAttribute("r", 11 + p * 22); g.ring.setAttribute("opacity", 1 - p); }, ease.out).catch(()=>{});
+        await wait(160, id);
+        await tween(560, p => tok.setAttribute("transform", `translate(${lerp(HUB.x, B.x, p)},${lerp(HUB.y, B.y, p)})`));
+        tok.remove();
+        B.rect.setAttribute("fill", RED);
+        log(g, text);
+        await wait(380, id);
+        B.rect.setAttribute("fill", INK);
+        await wait(320, id);
+      }
+    } catch (_) {}
+  }
+
+  document.getElementById("replay").addEventListener("click", () => play().catch(()=>{}));
+  play().catch(()=>{});
+})();
+</script>
+</body>
+</html>
